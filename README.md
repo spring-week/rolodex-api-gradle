@@ -1,7 +1,7 @@
 # Rolodex API: Gradle Edition :elephant:
 
 ### To Recreate this:
-1. Access Spring Initiliazer at start.spring.io
+1. Access Spring Initiliazer at [start.spring.io](https://start.spring.io)
 
 2. Select the following properties: 
     - Gradle Project
