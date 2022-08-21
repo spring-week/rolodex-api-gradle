@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.dto.Credentials;
@@ -66,7 +67,7 @@ public class UserController {
 	}
 	
 	@GetMapping("/{username}") // allows the client to send the request http://localhost:5000/api/users/thehulk
-	public ResponseEntity<User> findUserByUsername(@PathVariable("username") String username) {
+	public ResponseEntity<User> findUserByUsername(@RequestParam(value="username") String username) {
 		return ResponseEntity.ok(userv.getByUsername(username));
 	}
 	
