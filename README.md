@@ -32,6 +32,8 @@
 
 > *In the case that you need to add a new dependency to the `build.gradle` file, navigate to the Maven Central Repository and select the **Gradle (Short)** version.  Paste it beneath the other `dependencies`, then run `gradlew build --refresh-dependencies` to rebuild the project.*
 
+<br>
+
 </details>
 
 
@@ -83,6 +85,9 @@ docker run -d -p 5000:5000 my-api:auto
 ```
 
 :tada: *It should now be up and running at http://localhost:5000/api*
+
+<br>
+
 </details>
 
 
@@ -131,5 +136,7 @@ on:
     branches:
       - main
 ```
+
+<br>
 
 </details>
