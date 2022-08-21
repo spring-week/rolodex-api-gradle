@@ -60,18 +60,6 @@ public class User {
 	inverseJoinColumns = @JoinColumn(name = "address_id"))
 	private Set<Address> addresses;
 
-	// generate a constructor with no addresses and no id
-	public User(@Length(min = 2) String firstName, String lastName,
-			@NotBlank @Length(min = 2) @Pattern(regexp = "[a-zA-Z][a-zA-Z0-9]*") String username,
-			@NotBlank String password, @Email String email) {
-		super();
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.username = username;
-		this.password = password;
-		this.email = email;
-	}
-
 	/**
 	 * Regarding the validation constraints on some of the fields
 	 * 

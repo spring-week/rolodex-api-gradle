@@ -49,7 +49,7 @@ public class Address {
 	// declare the property of the owner of the relationship that this is mapped to
 	// (addresses in the User.java class)
 	@ManyToMany(mappedBy = "addresses")
-	private @NonNull Set<User> owners; // list of all users who are registered at this address
+	private Set<User> owners; // list of all users who are registered at this address
 
 	// constructor with no id and no owners field
 	public Address(String street, String secondary, @Length(min = 2, max = 2) String state, String city, String zip) {

@@ -3,6 +3,7 @@ package com.revature.controller;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.dto.Credentials;
+import com.revature.dto.UserDTO;
 import com.revature.models.User;
 import com.revature.service.UserService;
 
@@ -24,6 +26,7 @@ import com.revature.service.UserService;
 @RequestMapping("/users")
 public class UserController {
 
+	private static final ModelMapper modelMapper = new ModelMapper();
 	private UserService userv;
 
 	@Autowired
@@ -73,8 +76,10 @@ public class UserController {
 	}
 
 	@PostMapping("/add") // http://localhost:5000/api/users/add
-	public ResponseEntity<User> addUser(@Valid @RequestBody User u) {
-		return ResponseEntity.ok(userv.add(u));
+	public ResponseEntity<User> addUser(@Valid @RequestBody UserDTO userDto) {
+		
+		User user = modelMapper.map(userDto, User.class);
+		return ResponseEntity.ok(userv.add(user));
 	}
 
 	@GetMapping("/{id}") // allows the client to send the request http://localhost:5000/api/users/2
