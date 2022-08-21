@@ -1,6 +1,10 @@
 # Rolodex API: Gradle Edition :elephant:
 
-## To Recreate this:
+<details>
+    <summary>How to Recreate this App</summary>
+    
+<br>
+
 1. Access Spring Initiliazer at [start.spring.io](https://start.spring.io)
 
 2. Select the following properties: 
@@ -28,9 +32,15 @@
 
 > *In the case that you need to add a new dependency to the `build.gradle` file, navigate to the Maven Central Repository and select the **Gradle (Short)** version.  Paste it beneath the other `dependencies`, then run `gradlew build --refresh-dependencies` to rebuild the project.*
 
+</details>
+
 <br>
 
-## How to Dockeriza and Run
+<details>
+    <summary>How to Dockerize & Run this App</summary>
+
+<br>
+
 *The following Dockerfile assumes that you have already gnerated the artifact with the commands listed in the first step.  If you would like to explore more options, please use [this resource](https://codefresh.io/docs/docs/learn-by-example/java/gradle/).*
 
 1. In your `build.gradle` file, please add the following to name the build JAR as the name of your artifact and not the "artifact-1.0.0-SNAPSHOT.jar"
@@ -74,4 +84,4 @@ docker run -d -p 5000:5000 my-api:auto
 ```
 
 :tada: *It should now be up and running at http://localhost:5000/api*
-
+</details>
