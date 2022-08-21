@@ -12,12 +12,14 @@ import com.revature.models.Address;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 @Data
 @RequiredArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor // required for Jackson
 public class UserDTO {
 
 	@Length(min = 2)
