@@ -13,7 +13,6 @@ import lombok.Data;
 /**
  * The purpose of this class is to model info about an HTTP error.
  */
-
 @Data // toString, hashCode, equals, getters/setters... (if you don't have Lombok, right click -> source -> generate getters/setters
 public class ApiError {
 	
@@ -25,7 +24,7 @@ public class ApiError {
 	private String message; // represents the message
 	private String debugMessage; // represents the trace message about the error
 	
-	// List of SubErrors;
+	// List of SubErrors
 	List<ApiSubError> subErrors = new ArrayList<>();
 
 	public ApiError() {
