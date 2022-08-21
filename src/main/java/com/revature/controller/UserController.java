@@ -20,7 +20,7 @@ import com.revature.models.User;
 import com.revature.service.UserService;
 
 @RestController
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 @RequestMapping("/users")
 public class UserController {
 
