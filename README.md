@@ -34,7 +34,6 @@
 
 </details>
 
-<br>
 
 <details>
     <summary>How to Dockerize & Run this App</summary>
@@ -84,4 +83,53 @@ docker run -d -p 5000:5000 my-api:auto
 ```
 
 :tada: *It should now be up and running at http://localhost:5000/api*
+</details>
+
+
+<details>
+    <summary>How to Enable SonarCloud</summary>
+
+<br>
+
+1. Go to [SonarCloud.io](https://sonarcloud.io/) and import your repository.
+
+2. Once you import it, click at the top to configure CI-based analysis.
+
+3. Add the `SONAR TOKEN` and secret key to the Secrets section of the repository.
+
+4. Add the following to the `plugins {...}` portion of your `build.gradle` file.
+
+```groovy
+plugins {
+    ...
+    id "org.sonarqube" version "3.4.0.2513"
+}
+```
+
+5. Add the SonarQube properties SonarCloud tells you to add at the *bottom* of your `build.gradle` file. 
+
+6. Before you `git push`, edit the file permissions of `./gradlew` like so - this is so that the SonarQube platform can build & run the app with the gradle wrapper:
+
+```git
+git update-index --chmod=+x gradlew
+git add .
+git commit -m "Changing permission of gradlew"
+git push
+```
+
+7. `git add .`, `git commit -m"added sonar cloud plugin`, `git push` your changes!
+
+8. Now, go to your repository on github.com.  Click **Add file** in the root of your project.
+
+9. Name it `.github/workflows/build.yml`, which will create the appropriate .github/workflows directory for the build.yml.
+
+10. SonarCloud will provision you with the yml file to paste in there.  The only thing you need to change is the `branches` section from `master` to **`main`**
+
+```yml
+on:
+  push:
+    branches:
+      - main
+```
+
 </details>
