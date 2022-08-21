@@ -74,6 +74,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 	
 	/**
 	 * Intercept User Not Found Exception from the findByUsername() method in the controller
+	 * (which calls on the service layer, responsible for throwing the exception).
 	 */
 	@ExceptionHandler(UserNotFoundException.class) 
 	public ResponseEntity<Object> handleUserNotFoundException(UserNotFoundException ex) {

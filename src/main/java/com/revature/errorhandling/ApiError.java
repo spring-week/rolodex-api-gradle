@@ -35,6 +35,7 @@ public class ApiError {
 	
 	public ApiError(HttpStatus status) {
 		this(); // this() invokes another constructor that takes in the same arguments
+		//... so, the timestamp has been set as we do in the above constructor
 		this.status = status.value(); // 4xx, 5xx code, etc...
 		this.error = status.getReasonPhrase();
 	}

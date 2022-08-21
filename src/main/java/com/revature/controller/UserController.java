@@ -12,12 +12,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.dto.Credentials;
-import com.revature.exceptions.UserNotFoundException;
 import com.revature.models.User;
 import com.revature.service.UserService;
 
@@ -72,7 +70,6 @@ public class UserController {
 			// in the case that the UserService's getByUsename() method throws a UserNotFound error,
 			// the custom error handling will handle this
 		}
-
 	}
 
 	@PostMapping("/add") // http://localhost:5000/api/users/add
@@ -83,12 +80,6 @@ public class UserController {
 	@GetMapping("/{id}") // allows the client to send the request http://localhost:5000/api/users/2
 	public ResponseEntity<User> findUserById(@PathVariable("id") int id) {
 		return ResponseEntity.ok(userv.getById(id));
-	}
-
-	@RequestMapping(method = RequestMethod.GET) // allows the client to send the request
-												// http://localhost:5000/api/users/thehulk
-	public ResponseEntity<User> findUserByUsername(@RequestParam(value = "username") String username) {
-		return ResponseEntity.ok(userv.getByUsername(username));
 	}
 
 	@DeleteMapping("/{id}")
