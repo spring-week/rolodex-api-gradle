@@ -14,6 +14,11 @@ configurations {
 	}
 }
 
+// This replaces the <project-name>-<version>-<snapshot>.jar with the just <project-name>.jar
+bootJar {
+   archiveName = "$baseName.$extension"
+}
+
 repositories {
 	mavenCentral()
 }
