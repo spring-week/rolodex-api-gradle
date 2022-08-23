@@ -1,6 +1,6 @@
 # Rolodex API: Gradle Edition :elephant:
 
-You can run this app out of the box with `gradle bootRun`
+You can run this app out of the box with `./gradlew bootRun`
 
 <details>
     <summary>How to Recreate this App</summary>
