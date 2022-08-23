@@ -18,7 +18,6 @@ You can run this app out of the box with `./gradlew bootRun`
     - Package name: `com.revature`
     - Packaging: Jar
     - Java: 8
-    - Spring Starter Validation
 
 3.  Dependencies:
     - Spring Web
@@ -27,6 +26,7 @@ You can run this app out of the box with `./gradlew bootRun`
     - Lombok
     - Dev Tools
     - Spring Boot Actuator
+    - Spring Starter Validation
     - ModelMapper: `implementation 'org.modelmapper:modelmapper:3.1.0'`
 
 4.  Click **Generate**, extract the downloaded zip file to a directory. Import it into your IDE:
