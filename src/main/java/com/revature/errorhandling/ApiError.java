@@ -53,24 +53,5 @@ public class ApiError {
 	
 	public void addSubError(ApiSubError err) {
 		this.subErrors.add(err);
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	}	
 }

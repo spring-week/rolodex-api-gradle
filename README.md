@@ -25,6 +25,7 @@
     - Lombok
     - Dev Tools
     - Spring Boot Actuator
+    - ModelMapper: ``
 
 4.  Click **Generate**, extract the downloaded zip file to a directory. Import it into your IDE:
     - For **SpringToolSuites**: go to Import > Gradle project.

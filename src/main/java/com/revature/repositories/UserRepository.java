@@ -14,13 +14,13 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 
 	// .save(), .findAll(), .update(), .deleteById() are already created
 	
-	Optional<User> findUserByUsernameAndPassword(String username, String password);
+	Optional<User> findByUsernameAndPassword(String username, String password);
 	
 	Optional<User> findByUsername(String username);
 	
 	List<User> findByOrderByLastName(); // returns all the users ordered by last name
 	
 	// custom query
-	@Query("From User WHERE email LIKE %:pattern") // the : is a placeholder for the argument
+	@Query("FROM User WHERE email LIKE %:pattern") // the : is a placeholder for the argument
 	List<User> findByEmailContains(String pattern); // johnsmi -> returns johnsmith@gmail.com
 }

@@ -18,10 +18,10 @@ import com.revature.repositories.AddressRepository;
 import com.revature.repositories.UserRepository;
 
 /**
- * This Service Component is responsible for calling all the necessary repository
- * methods.
+ * This Service Component is responsible for calling all the necessary
+ * repository methods.
  * 
- * We will inject this Service Component into the AuthController & UserController
+ * We will inject this Service Component into the UserController.
  */
 @Service
 public class UserService {
@@ -36,12 +36,17 @@ public class UserService {
 		this.userRepo = userRepo;
 		this.addressRepo = addressRepo;
 	}
+	
+	// Dummy method to demonstrate a method to test
+	public int divide(int x, int y) throws ArithmeticException {
+			return x/y;
+	}
 
 	// the AuthController will pass the creds DTO object to this method
-	public User authenticate(Credentials creds) {
-		
-		Optional<User> userInDb = userRepo.findUserByUsernameAndPassword(creds.getUsername(), creds.getPassword());
-		
+	public User getByCredentials(Credentials creds) {
+
+		Optional<User> userInDb = userRepo.findByUsernameAndPassword(creds.getUsername(), creds.getPassword());
+
 		if (userInDb.isPresent()) {
 			log.info("Found user with username {}", creds.getUsername());
 			return userInDb.get();
@@ -52,20 +57,24 @@ public class UserService {
 	}
 
 	@Transactional(readOnly = true)
-	public Set<User> findAll() {
+	public Set<User> getAll() {
 		// here we are using the stream API to transform the List to a Set to avoid
 		// duplicates
 		return userRepo.findAll().stream().collect(Collectors.toSet());
 	}
 
-	// Every time that this method is invoked, we want to begin a new Transaction
+	/**
+	 * Every time that this method is invoked, we want to begin a new Transaction.
+	 * 
+	 * When the propagation is REQUIRES_NEW, Spring suspends the current transaction
+	 * if it exists, and then creates a new one
+	 */
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public User add(User u) {
 
 		/**
-		 *  check if the user object being added owns any addresses 
-		 *  (u.getAddresses != null). If it does, 
-		 *  iterate over them and add each Address object
+		 * check if the user object being added owns any addresses (u.getAddresses !=
+		 * null). If it does, iterate over them and add each Address object
 		 */
 		if (u.getAddresses() != null) {
 			u.getAddresses().forEach(address -> addressRepo.save(address));
@@ -73,6 +82,7 @@ public class UserService {
 		return userRepo.save(u);
 	}
 
+	// https://dzone.com/articles/how-does-spring-transactional
 	@Transactional(propagation = Propagation.REQUIRED) // default setting of transactions in Spring
 	public void remove(int id) {
 		userRepo.deleteById(id);

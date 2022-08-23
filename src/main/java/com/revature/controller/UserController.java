@@ -38,7 +38,7 @@ public class UserController {
 	@PostMapping("/login")
 	public User login(@RequestBody Credentials creds, HttpServletResponse response) {
 
-		User user = userv.authenticate(creds);
+		User user = userv.getByCredentials(creds);
 
 		if (user != null) {
 			// return the user as JSON
@@ -63,11 +63,11 @@ public class UserController {
 	 *         situation of returning EITHER a set or 1 user.
 	 */
 	@GetMapping
-	public ResponseEntity<?> getUsers(@RequestParam(value = "username") final String username) {
+	public ResponseEntity<?> getUsers(@RequestParam(value = "username", required=false) final String username) {
 
 		// If there is no query parameter for the username, return all users
 		if (username == null || username.isEmpty()) {
-			return ResponseEntity.ok(userv.findAll());
+			return ResponseEntity.ok(userv.getAll());
 		} else {
 			return ResponseEntity.ok(userv.getByUsername(username));
 			// in the case that the UserService's getByUsename() method throws a UserNotFound error,
