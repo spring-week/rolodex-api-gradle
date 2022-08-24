@@ -33,6 +33,35 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 		return ResponseEntity.status(apiError.getStatus()).body(apiError);
 	}
 	
+	/**
+	 * Intercept User Not Found Exception from the findByUsername() method in the controller
+	 * (which calls on the service layer, responsible for throwing the exception).
+	 */
+	@ExceptionHandler(UserNotFoundException.class) 
+	public ResponseEntity<Object> handleUserNotFoundException(UserNotFoundException ex) {
+		
+		String error = "No User found with that username";
+		ApiError apiError = new ApiError(HttpStatus.NOT_FOUND, ex, error);
+		
+		return buildResponseEntity(apiError);	
+	}
+	
+	/**
+	 * Intercept exceptions that are caused by Invalid JSON..
+	 * 
+	 * Send back some 4xx error telling the client that it's their fault and the server
+	 * doesn't know how to read that request
+	 */
+	@Override
+	protected ResponseEntity<Object> handleHttpMessageNotReadable(
+			HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+
+		String error = "Malformed JSON request";
+		ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST, ex, error);
+		
+		return buildResponseEntity(apiError);
+	}
+	
 	/** 
 	 * Intercept exceptions that are caused by validation issues...
 	 * 
@@ -56,32 +85,6 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 		return buildResponseEntity(apiError); // intercept what otherwise would have been returned
  	}
 	
-	/**
-	 * Intercept exceptions that are caused by Invalid JSON..
-	 * 
-	 * Send back some 4xx error telling the client that it's their fault and the server
-	 * doesn't know how to read that request
-	 */
-	@Override
-	protected ResponseEntity<Object> handleHttpMessageNotReadable(
-			HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
 
-		String error = "Malformed JSON request";
-		ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST, ex, error);
-		
-		return buildResponseEntity(apiError);
-	}
-	
-	/**
-	 * Intercept User Not Found Exception from the findByUsername() method in the controller
-	 * (which calls on the service layer, responsible for throwing the exception).
-	 */
-	@ExceptionHandler(UserNotFoundException.class) 
-	public ResponseEntity<Object> handleUserNotFoundException(UserNotFoundException ex) {
-		
-		String error = "No User found with that username";
-		ApiError apiError = new ApiError(HttpStatus.NOT_FOUND, ex, error);
-		
-		return buildResponseEntity(apiError);	
-	}
+
 }
